@@ -1,19 +1,17 @@
-// module.exports = {
-//   HOST: 'localhost',
-//   PORT: 27017,
-//   DB: 'traveasy_db',
-//   imgBucket: 'photos',
-//   url: 'mongodb://localhost/',
-// };
+const mongoose = require('mongoose');
 
-module.exports = {
-  DB: 'test',
-  imgBucket: 'photos',
+const connectDB = async () => {
+    try {
+        const conn = await mongoose.connect(  process.env.DB_URL || 'mongodb+srv://sandysawy:GJMs0Brs133ZJMkM@cluster0.nyw9gms.mongodb.net/traveasy',
+            {
+                useNewUrlParser: true,
+                useUnifiedTopology: true,
+            })
+            .then(() => console.log('Connected to database'))
+    }
+    catch (err) {
+        console.log('Failed to connect to database', err);
+    }
+}
 
-  HOST: 'localhost',
-  PORT: 27017,
-
-  url: 'mongodb+srv://traveasy_db:oOq6ioaNBgbne6fc@clustertraveasydb.yivj1rk.mongodb.net/',
-};
-
-//`mongodb+srv://traveasy_db:oOq6ioaNBgbne6fc@clustertraveasydb.yivj1rk.mongodb.net/test/files`
+module.exports = connectDB;

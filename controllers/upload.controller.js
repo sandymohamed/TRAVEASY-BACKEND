@@ -1,10 +1,9 @@
 const upload = require('../middlewares/upload');
-const dbConfig = require('../config/db.config');
 
 const MongoClient = require('mongodb').MongoClient;
 const GridFSBucket = require('mongodb').GridFSBucket;
 
-const url = dbConfig.url;
+const url =  process.env.DB_URL || 'mongodb+srv://sandysawy:GJMs0Brs133ZJMkM@cluster0.nyw9gms.mongodb.net/traveasy';
 const baseUrl = 'https://traveasy.herokuapp.com/files/';
 
 const mongoClient = new MongoClient(url);
@@ -36,8 +35,8 @@ const getListFiles = async (req, res) => {
   try {
     await mongoClient.connect();
 
-    const database = mongoClient.db(dbConfig.DB);
-    const images = database.collection(dbConfig.imgBucket + '.files');
+    const database = mongoClient.db('test');
+    const images = database.collection('photos'+ '.files');
 
     const cursor = images.find({});
 
@@ -67,9 +66,9 @@ const download = async (req, res) => {
   try {
     await mongoClient.connect();
 
-    const database = mongoClient.db(dbConfig.DB);
+    const database = mongoClient.db('test');
     const bucket = new GridFSBucket(database, {
-      bucketName: dbConfig.imgBucket,
+      bucketName: 'photos',
     });
 
     let downloadStream = bucket.openDownloadStreamByName(req.params.name);
@@ -95,8 +94,8 @@ const getImg = async (req, res) => {
   try {
     await mongoClient.connect();
 
-    const database = mongoClient.db(dbConfig.DB);
-    const images = database.collection(dbConfig.imgBucket + '.files');
+    const database = mongoClient.db('test');
+    const images = database.collection('photos' + '.files');
 
     const cursor = images.find({});
     // let { imgName } = req.query;

@@ -3,8 +3,8 @@ const cors = require('cors');
 const cookieSession = require('cookie-session');
 const app = express();
 const db = require('./models');
+const connectDB = require('./config/db.config');
 const Role = db.role;
-const dbConfig = require('./config/db.config');
 const { cityRouter } = require('./routes/city.routes');
 const { holidaysRouter } = require('./routes/holidays.routes')
 const { hotelsRouter } = require('./routes/hotels.routes')
@@ -12,6 +12,11 @@ const { bookedHolidaysRouter } = require('./routes/bookedHoliddays.routes')
 const { bookedHotelsRouter } = require('./routes/bookedHotels.routes');
 const { FeedbackRouter } = require('./routes/feedback.routes');
 const {stripeRoutes} = require('./routes/stripe.routes');
+
+
+console.log('dddddd', process.env.DB_URL);
+connectDB();
+
 
 // front end credentials
 app.use((req, res, next) => {
@@ -42,20 +47,6 @@ app.use(
   })
 );
 
-db.mongoose
-  //.connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
-    .connect(`mongodb+srv://traveasy_db:oOq6ioaNBgbne6fc@clustertraveasydb.yivj1rk.mongodb.net/test`, {
-   useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => {
-    console.log('Successfully connect to MongoDB.');
-    initial();
-  })
-  .catch((err) => {
-    console.error('Connection error', err);
-    process.exit();
-  });
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;

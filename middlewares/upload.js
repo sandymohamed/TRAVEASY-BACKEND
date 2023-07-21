@@ -1,11 +1,10 @@
 const util = require('util');
 const multer = require('multer');
 const { GridFsStorage } = require('multer-gridfs-storage');
-const dbConfig = require('../config/db.config');
 
 var storage = new GridFsStorage({
 
-  url: dbConfig.url + dbConfig.DB,
+  url: process.env.DB_URL + 'test',
   options: { useNewUrlParser: true, useUnifiedTopology: true },
 
   file: (req, file) => {
@@ -18,7 +17,7 @@ var storage = new GridFsStorage({
     }
 
     return {
-      bucketName: dbConfig.imgBucket,
+      bucketName: 'photos',
       filename: `${Date.now()}-traveasy-${file.originalname}`,
     };
   },
