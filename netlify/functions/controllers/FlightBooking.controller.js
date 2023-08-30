@@ -1,10 +1,10 @@
-let db = require('../models');
+let db = require('../../../models');
 let FlightBookingDB = db.flightBooking;
 let TouristDB = db.user;
 let FlightDB = db.flight;
 const ObjectId = require('mongoose').Types.ObjectId;
 var nodemailer = require('nodemailer');
-let config = require('../config/mailer.config')
+let config = require('../../../config/mailer.config')
 
 
  

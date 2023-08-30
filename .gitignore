@@ -1,3 +1,7 @@
 node_modules/
 *.zip
 *.logs
+.vercel
+
+# Local Netlify folder
+.netlify

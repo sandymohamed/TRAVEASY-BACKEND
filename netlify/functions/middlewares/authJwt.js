@@ -1,7 +1,7 @@
 let jwt = require('jsonwebtoken');
-let config = require('../config/auth.config');
-let { role } = require('../models');
-let db = require('../models');
+let config = require('../../../config/auth.config');
+let { role } = require('../../../models');
+let db = require('../../../models');
 let User = db.user;
 let Role = db.role;
 

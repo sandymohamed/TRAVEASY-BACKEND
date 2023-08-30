@@ -41,7 +41,10 @@ const userSchema = new mongoose.Schema({
     required: [true, 'country is required!!'],
     minLength: 3,
   },
-  birthday: { type: Date, default: Date.now() },
+  birthday: { 
+    type: Date, 
+    default: Date.now() 
+  },
   roles: [
     {
       type: mongoose.Schema.Types.ObjectId,

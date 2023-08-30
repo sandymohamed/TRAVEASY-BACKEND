@@ -3,8 +3,9 @@ const upload = require('../middlewares/upload');
 const MongoClient = require('mongodb').MongoClient;
 const GridFSBucket = require('mongodb').GridFSBucket;
 
-const url =  process.env.DB_URL || 'mongodb+srv://sandysawy:GJMs0Brs133ZJMkM@cluster0.nyw9gms.mongodb.net/traveasy';
-const baseUrl = 'https://traveasy.herokuapp.com/files/';
+const url = 'mongodb+srv://sandysawy:dg5HkZRdjdfvjwOL@cluster0.nyw9gms.mongodb.net/traveasy';
+// const baseUrl = 'https://traveasy.herokuapp.com/files/';
+const baseUrl = 'http://localhost:8080/files/';
 
 const mongoClient = new MongoClient(url);
 
@@ -24,7 +25,6 @@ const uploadFiles = async (req, res) => {
       message: 'Files has been uploaded.',
     });
   } catch (error) {
-
     return res.status(500).send({
       message: `Error when trying upload many files: ${error}`,
     });
@@ -35,8 +35,8 @@ const getListFiles = async (req, res) => {
   try {
     await mongoClient.connect();
 
-    const database = mongoClient.db('test');
-    const images = database.collection('photos'+ '.files');
+    const database = mongoClient.db('traveasytest');
+    const images = database.collection('photos' + '.files');
 
     const cursor = images.find({});
 
@@ -66,7 +66,7 @@ const download = async (req, res) => {
   try {
     await mongoClient.connect();
 
-    const database = mongoClient.db('test');
+    const database = mongoClient.db('traveasytest');
     const bucket = new GridFSBucket(database, {
       bucketName: 'photos',
     });
@@ -94,7 +94,7 @@ const getImg = async (req, res) => {
   try {
     await mongoClient.connect();
 
-    const database = mongoClient.db('test');
+    const database = mongoClient.db('traveasytest');
     const images = database.collection('photos' + '.files');
 
     const cursor = images.find({});
@@ -113,9 +113,9 @@ const getImg = async (req, res) => {
         url: baseUrl + doc.filename,
       });
     });
-    const regex = new RegExp('.*' + req.query.imgName  + '.*', 'gi');
+    const regex = new RegExp('.*' + req.query.imgName + '.*', 'gi');
 
-   const img= fileInfos.filter((img)=> (
+    const img = fileInfos.filter((img) => (
       // img.name ===  req.query.imgName 
       img.name.match(regex)
     ))

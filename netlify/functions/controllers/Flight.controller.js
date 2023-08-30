@@ -1,4 +1,4 @@
-let db = require('../models');
+let db = require('../../../models');
 let FlightDB = db.flight;
 let airlineDB = db.airline
 const ObjectId = require('mongoose').Types.ObjectId;

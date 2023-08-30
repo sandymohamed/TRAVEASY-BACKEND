@@ -9,6 +9,7 @@ const path = require('path');
 const uploadViews = (req, res) => {
   return res.sendFile(path.join(`${__dirname}/../views/index.html`));
 };
+
 module.exports = (app) => {
   app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Headers', 'Origin, Content-Type, Accept');

@@ -5,16 +5,15 @@ const app = express();
 const db = require('./models');
 const connectDB = require('./config/db.config');
 const Role = db.role;
-const { cityRouter } = require('./routes/city.routes');
-const { holidaysRouter } = require('./routes/holidays.routes')
-const { hotelsRouter } = require('./routes/hotels.routes')
-const { bookedHolidaysRouter } = require('./routes/bookedHoliddays.routes')
-const { bookedHotelsRouter } = require('./routes/bookedHotels.routes');
-const { FeedbackRouter } = require('./routes/feedback.routes');
-const {stripeRoutes} = require('./routes/stripe.routes');
+const { cityRouter } = require('./netlify/functions/routes/city.routes');
+const { holidaysRouter } = require('./netlify/functions/routes/holidays.routes')
+const { hotelsRouter } = require('./netlify/functions/routes/hotels.routes')
+const { bookedHolidaysRouter } = require('./netlify/functions/routes/bookedHoliddays.routes')
+const { bookedHotelsRouter } = require('./netlify/functions/routes/bookedHotels.routes');
+const { FeedbackRouter } = require('./netlify/functions/routes/feedback.routes');
+const {stripeRoutes} = require('./netlify/functions/routes/stripe.routes');
 
 
-console.log('dddddd', process.env.DB_URL);
 connectDB();
 
 
@@ -64,12 +63,12 @@ app.use(["/feedback", "/feedbacks"], FeedbackRouter);
 app.use(["/stripe", "/stripes"], stripeRoutes);
 
 
-require('./routes/upload.routes')(app);
-require('./routes/auth.routes')(app);
-require('./routes/user.routes')(app);
-require('./routes/airline.routes')(app);
-require('./routes/Flight.routes')(app);
-require('./routes/FlightBooking.routes')(app);
+require('./netlify/functions/routes/upload.routes')(app);
+require('./netlify/functions/routes/auth.routes')(app);
+require('./netlify/functions/routes/user.routes')(app);
+require('./netlify/functions/routes/airline.routes')(app);
+require('./netlify/functions/routes/Flight.routes')(app);
+require('./netlify/functions/routes/FlightBooking.routes')(app);
 
 function initial() {
   Role.estimatedDocumentCount((err, count) => {

@@ -1,5 +1,5 @@
 
-let db = require('../models');
+let db = require('../../../models');
 let AirlineDB = db.airline;
 const ObjectId = require('mongoose').Types.ObjectId ;
 
@@ -48,6 +48,7 @@ const GetAirlineByID = async (req, res)=> {
 const CreateAirline = (req, res)=> {
     let {AirlineName , Country ,Evaluation ,ImgURL
          , Price} = req.body;
+         
     let airlineModel = new AirlineDB({
     AirlineName : AirlineName,
     Country : Country,

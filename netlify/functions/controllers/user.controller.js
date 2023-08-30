@@ -1,14 +1,14 @@
-let db = require('../models');
+let db = require('../../../models');
 let UsersDB = db.user;
 let RolesDB = db.role;
 let AirlineDB = db.airline;
 let FlightDB = db.flight;
 let FlightBookingDB = db.flightBooking;
-let BookedHolidaysModel = require('../models/HolidaysBooking.model');
-let BookedHotelsModel = require('../models/bookedHotels.model');
-let CityModel = require('../models/City.model');
-let FeedbackModel = require('../models/feedback.model');
-let HotelModel = require('../models/Hotels.model');
+let BookedHolidaysModel = require('../../../models/HolidaysBooking.model');
+let BookedHotelsModel = require('../../../models/bookedHotels.model');
+let CityModel = require('../../../models/City.model');
+let FeedbackModel = require('../../../models/feedback.model');
+let HotelModel = require('../../../models/Hotels.model');
 
 let bcrypt = require('bcryptjs');
 

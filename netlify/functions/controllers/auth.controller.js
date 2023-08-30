@@ -1,11 +1,11 @@
-let config = require('../config/auth.config');
-let db = require('../models');
+let config = require('../../../config/auth.config');
+let db = require('../../../models');
 let User = db.user;
 let Role = db.role;
 
 let jwt = require('jsonwebtoken');
 let bcrypt = require('bcryptjs');
-let { role } = require('../models');
+let { role } = require('../../../models');
 /*
 There are 3 main functions for Authentication:
 - signup: create new User in MongoDB database (role is user if not specifying role)
